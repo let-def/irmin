@@ -20,6 +20,11 @@ module Utils = struct
   let display_progress_end () =
     if Unix.isatty Unix.stderr then Format.eprintf "@."
 
+  let write_buf descr buf =
+    let oc = Unix.out_channel_of_descr (Lwt_unix.unix_file_descr descr) in
+    Buffer.output_buffer oc buf;
+    flush oc
+
   let write_string ?(pos = 0) ?len descr buf =
     let len = match len with None -> String.length buf - pos | Some l -> l in
     let rec inner pos len =
@@ -147,10 +152,10 @@ let dump tree fd =
   let buf = Buffer.create 10_000_000 in
   let written = ref 0 in
   let flush () =
-    let contents = Buffer.contents buf in
+    written := !written + Buffer.length buf;
+    Utils.write_buf fd buf;
     Buffer.clear buf;
-    written := !written + String.length contents;
-    Utils.write_string fd contents
+    Lwt.return_unit
   in
   let maybe_flush () =
     if (* true *) Buffer.length buf > 1_000_000 then flush ()
