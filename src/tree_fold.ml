@@ -8,14 +8,11 @@ module Utils = struct
     let len = String.length s in
     if len > 0 then Printf.eprintf "\r%*s\r" len ""
 
-  let display_progress ?(refresh_rate = (1, 1)) msgf =
-    if Unix.isatty Unix.stderr then
-      let index, rate = refresh_rate in
-      if index mod rate == 0 then
-        msgf
-          (Format.kasprintf (fun msg ->
-               hide_progress_line msg;
-               Format.eprintf "%s%!" msg))
+  let display_progress msgf =
+    msgf
+      (Format.kasprintf (fun msg ->
+           hide_progress_line msg;
+           Format.eprintf "%s%!" msg))
 
   let display_progress_end () =
     if Unix.isatty Unix.stderr then Format.eprintf "@."
@@ -98,10 +95,10 @@ let fold_tree_path ~(written : int ref) ~(maybe_flush : unit -> unit Lwt.t) ~buf
   let set_visit =
     let total_visited = ref 0 in
     fun h ->
-      Utils.display_progress ~refresh_rate:(!total_visited, 1_000) (fun m ->
-          m "Context: %dK elements, %dMiB written%!" (!total_visited / 1_000)
-            (!written / 1_048_576));
-
+      if !total_visited land 1023 = 1023 then
+        Utils.display_progress (fun m ->
+            m "Context: %dK elements, %dMiB written%!" (!total_visited / 1_000)
+              (!written / 1_048_576));
       incr total_visited;
       Tbl.add visited_hash h;
       ()
