@@ -3,3 +3,5 @@
  (public_name ppx_irmin._lib)
  (preprocess future_syntax)
  (libraries ppxlib))
+
+(env (_ (ocamlopt_flags (:standard -compact))))

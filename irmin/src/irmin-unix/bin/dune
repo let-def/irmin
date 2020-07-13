@@ -3,3 +3,5 @@
  (public_name irmin)
  (package irmin-unix)
  (libraries checkseum.c digestif.c irmin-unix))
+
+(env (_ (ocamlopt_flags (:standard -compact))))

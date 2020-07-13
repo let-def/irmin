@@ -4,3 +4,5 @@
  (preprocess
   (pps ppx_irmin))
  (libraries digestif.c irmin irmin-mem alcotest alcotest-lwt lwt hex))
+
+(env (_ (ocamlopt_flags (:standard -compact))))

@@ -1,4 +1,6 @@
 (library
  (name irmin_mirage)
  (public_name irmin-mirage)
- (libraries irmin irmin-mem ptime mirage-clock))
+ (libraries my_lwt irmin irmin-mem ptime mirage-clock))
+
+(env (_ (ocamlopt_flags (:standard -compact))))

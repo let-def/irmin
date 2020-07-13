@@ -9,6 +9,7 @@
    index
    irmin
    irmin-pack
+   irmin-my_lwt
    lwt
    lwt.unix
    tezos-crypto
@@ -16,3 +17,5 @@
    data-encoding
    ocplib-endian
    fmt))
+
+(env (_ (ocamlopt_flags (:standard -compact))))

@@ -1,4 +1,6 @@
 (library
  (name irmin_http)
  (public_name irmin-http)
- (libraries irmin cohttp-lwt webmachine))
+ (libraries my_lwt irmin cohttp-lwt webmachine))
+
+(env (_ (ocamlopt_flags (:standard -compact))))

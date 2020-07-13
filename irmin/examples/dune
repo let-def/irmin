@@ -13,3 +13,5 @@
  (package irmin-unix)
  (deps readme.exe trees.exe sync.exe process.exe deploy.exe push.exe
    irmin_git_store.exe custom_merge.exe))
+
+(env (_ (ocamlopt_flags (:standard -compact))))

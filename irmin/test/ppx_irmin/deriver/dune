@@ -1,3 +1,5 @@
 (executable
  (name gen_dune_rules)
  (modules gen_dune_rules))
+
+(env (_ (ocamlopt_flags (:standard -compact))))

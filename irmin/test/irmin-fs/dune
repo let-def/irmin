@@ -13,3 +13,5 @@
  (package irmin-fs)
  (action
   (run ./test.exe -q --color=always)))
+
+(env (_ (ocamlopt_flags (:standard -compact))))

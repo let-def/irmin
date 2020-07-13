@@ -1,4 +1,6 @@
 (library
  (name irmin_git)
  (public_name irmin-git)
- (libraries irmin git))
+ (libraries my_lwt irmin git))
+
+(env (_ (ocamlopt_flags (:standard -compact))))

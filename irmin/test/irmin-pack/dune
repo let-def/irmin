@@ -28,3 +28,5 @@
  (name common)
  (modules common)
  (libraries irmin-test irmin-pack))
+
+(env (_ (ocamlopt_flags (:standard -compact))))

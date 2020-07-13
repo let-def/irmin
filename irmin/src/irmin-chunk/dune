@@ -2,3 +2,5 @@
  (name irmin_chunk)
  (public_name irmin-chunk)
  (libraries irmin))
+
+(env (_ (ocamlopt_flags (:standard -compact))))

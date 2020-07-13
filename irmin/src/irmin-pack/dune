@@ -1,4 +1,6 @@
 (library
  (public_name irmin-pack)
  (name irmin_pack)
- (libraries irmin logs lwt.unix index.unix))
+ (libraries my_lwt irmin logs lwt.unix index.unix))
+
+(env (_ (ocamlopt_flags (:standard -compact))))

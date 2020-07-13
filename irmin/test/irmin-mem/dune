@@ -23,3 +23,5 @@
  (name bench)
  (action
   (run ./bench.exe)))
+
+(env (_ (ocamlopt_flags (:standard -compact))))

@@ -16,3 +16,5 @@
   (chdir
    %{workspace_root}
    (run %{exe:test.exe} -q --color=always))))
+
+(env (_ (ocamlopt_flags (:standard -compact))))

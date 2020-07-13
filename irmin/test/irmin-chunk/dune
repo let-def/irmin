@@ -13,3 +13,5 @@
  (package irmin-chunk)
  (action
   (run ./test.exe -q --color=always)))
+
+(env (_ (ocamlopt_flags (:standard -compact))))

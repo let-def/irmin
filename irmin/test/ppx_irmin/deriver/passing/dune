@@ -19,3 +19,5 @@
  (package ppx_irmin)
  (action
   (diff dune.inc dune.inc.gen)))
+
+(env (_ (ocamlopt_flags (:standard -compact))))
