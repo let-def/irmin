@@ -63,19 +63,20 @@ let heap_log, statmemprof_log, event_log =
   (heap, statmemprof, events)
 
 module Tbl = struct
-  include Hashset.Make (struct
-    type t = string
-
     external get_64 : string -> int -> int64 = "%caml_string_get64u"
 
-    let hash x = Int64.to_int (get_64 x 0)
+  include Hashset.Make (struct
+    type t = int
 
-    let equal x y = String.equal x y
+
+    let hash x : t = x
+
+    let equal = Int.equal
   end)
 
   let to_bin_string = Irmin.Type.(unstage (to_bin_string Store.Hash.t))
 
-  let of_hash h = String.sub (to_bin_string h) 0 5
+  let of_hash h = Int64.to_int (get_64 (to_bin_string h) 0)
 
   let mem t k = mem t (of_hash k)
 
